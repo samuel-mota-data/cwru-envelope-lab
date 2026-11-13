@@ -25,9 +25,9 @@ Fonte: [CWRU · Apparatus & Procedures](https://engineering.case.edu/bearingdata
 |---|---|---|
 | Pista externa (BPFO) | 3,5848 | 107,4 Hz |
 | Pista interna (BPFI) | 5,4152 | 162,2 Hz |
-| Esfera (BSF) | 2,3570 | 70,6 Hz (2×BSF = 141,2 Hz) |
+| Esfera, "Rolling Element" (2×BSF) | 4,7135 | 141,2 Hz (BSF = 70,6 Hz) |
 
-Multiplicadores da página *Bearing Specifications* da CWRU.
+Multiplicadores oficiais da página [Bearing Information](https://engineering.case.edu/bearingdatacenter/bearing-information) da CWRU. O valor de "Rolling Element" que a CWRU publica é o dobro da frequência da esfera (2×BSF). O rolamento do lado do ventilador (6203) tem BPFO 3,0530, BPFI 4,9469 e 2×BSF 3,9874.
 
 ## Ensaios
 
@@ -35,6 +35,7 @@ Multiplicadores da página *Bearing Specifications* da CWRU.
 |---|---|---|
 | [Ensaio 1](notebooks/01_ensaio1_envelope.ipynb) | O envelope do sinal bruto (Método 1 do artigo) acha as três falhas? | **3 de 4.** Pista externa e interna em 1º lugar; sem defeito limpo; esfera escondida. |
 | [Ensaio 2](notebooks/02_ensaio2_esfera.ipynb) | Os Métodos 2 (cepstro) e 3 (curtose espectral, simplificado) acham a esfera? | **2 de 9.** Cepstro acha a de 0,021"; envelope acha a de 0,007" pela BSF; a de 0,014" não aparece. |
+| [Ensaio 3](notebooks/03_ensaio3_dominio.ipynb) | Um classificador treinado num rolamento funciona com outra carga ou outro rolamento? | Modelo em Hz fixos: **100% → 26% → 33%**, com até 83% de falsos negativos. Modelo com a frequência de falha de cada rolamento: **100%** nos três testes. |
 
 **Critério de acerto:** o maior valor a ±2% da frequência teórica fica entre os 3 maiores picos do espectro de envelope (5–500 Hz).
 
@@ -44,7 +45,7 @@ Multiplicadores da página *Bearing Specifications* da CWRU.
 
 ```bash
 pip install -r requirements.txt
-python data/download.py      # baixa 6 arquivos (~18 MB) do site da CWRU e confere o SHA-256
+python data/download.py      # baixa 20 arquivos (~62 MB) do site da CWRU e confere o SHA-256
 jupyter notebook notebooks/
 ```
 
@@ -54,7 +55,7 @@ Os dados ficam no site oficial da CWRU; o script baixa e confere cada arquivo, p
 
 - Não confere linha a linha a tabela do artigo (o PDF é pago).
 - O Método 3 é simplificado: escolhe a faixa por curtose espectral, sem a separação discreto/aleatório do benchmark.
-- Não testa outro motor. Esse é o próximo ensaio: treinar nesta bancada e testar em outra base pública, para medir falsos positivos e falsos negativos.
+- O ensaio 3 troca o rolamento e o sensor, mas o motor e a bancada são os mesmos. O próximo passo é testar num motor de outra bancada.
 
 ## Licença
 

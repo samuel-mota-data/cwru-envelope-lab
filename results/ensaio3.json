@@ -1,0 +1,140 @@
+{
+ "C · mesmos arquivos (controle)": {
+  "ingenuo": {
+   "acerto": 1.0,
+   "falso_negativo": 0.0,
+   "falso_positivo": 0.0,
+   "matriz": [
+    [
+     10,
+     0,
+     0
+    ],
+    [
+     0,
+     20,
+     0
+    ],
+    [
+     0,
+     0,
+     20
+    ]
+   ]
+  },
+  "fisica": {
+   "acerto": 1.0,
+   "falso_negativo": 0.0,
+   "falso_positivo": 0.0,
+   "matriz": [
+    [
+     10,
+     0,
+     0
+    ],
+    [
+     0,
+     20,
+     0
+    ],
+    [
+     0,
+     0,
+     20
+    ]
+   ]
+  }
+ },
+ "A · mesmo rolamento, carga nova": {
+  "ingenuo": {
+   "acerto": 0.26,
+   "falso_negativo": 0.6,
+   "falso_positivo": 0.0,
+   "matriz": [
+    [
+     10,
+     0,
+     0
+    ],
+    [
+     20,
+     0,
+     0
+    ],
+    [
+     4,
+     13,
+     3
+    ]
+   ]
+  },
+  "fisica": {
+   "acerto": 1.0,
+   "falso_negativo": 0.0,
+   "falso_positivo": 0.0,
+   "matriz": [
+    [
+     10,
+     0,
+     0
+    ],
+    [
+     0,
+     20,
+     0
+    ],
+    [
+     0,
+     0,
+     20
+    ]
+   ]
+  }
+ },
+ "B · rolamento novo (6203, FE)": {
+  "ingenuo": {
+   "acerto": 0.333,
+   "falso_negativo": 0.829,
+   "falso_positivo": 0.0,
+   "matriz": [
+    [
+     20,
+     0,
+     0
+    ],
+    [
+     30,
+     10,
+     0
+    ],
+    [
+     28,
+     2,
+     0
+    ]
+   ]
+  },
+  "fisica": {
+   "acerto": 1.0,
+   "falso_negativo": 0.0,
+   "falso_positivo": 0.0,
+   "matriz": [
+    [
+     20,
+     0,
+     0
+    ],
+    [
+     0,
+     40,
+     0
+    ],
+    [
+     0,
+     0,
+     30
+    ]
+   ]
+  }
+ }
+}

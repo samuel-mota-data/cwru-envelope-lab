@@ -10,9 +10,19 @@ from scipy.signal import hilbert, butter, sosfiltfilt, stft
 
 FS = 12_000  # amostras por segundo
 
-# Multiplicadores da frequência do eixo para o rolamento SKF 6205-2RS (lado acionado),
-# conforme a página "Bearing Specifications" da CWRU.
-MULT = {"BPFO": 3.5848, "BPFI": 5.4152, "BSF": 2.3570, "FTF": 0.3983}
+# Multiplicadores da frequência do eixo, página oficial "Bearing Information" da CWRU.
+# A CWRU lista "Rolling Element" = 4.7135 (DE), que é 2xBSF; BSF = 4.7135 / 2.
+MULT = {"BPFO": 3.5848, "BPFI": 5.4152, "BSF": 4.7135 / 2, "FTF": 0.39828}
+MULT_FE = {"BPFO": 3.0530, "BPFI": 4.9469, "BSF": 3.9874 / 2, "FTF": 0.3817}  # 6203-2RS, lado do ventilador
+
+
+def load_channel(path, ch="DE"):
+    """Lê o sinal de um acelerômetro (DE = lado acionado, FE = lado do ventilador) e a rotação."""
+    m = loadmat(path)
+    key = next(k for k in m if k.endswith(f"_{ch}_time"))
+    rpm_keys = [k for k in m if k.endswith("RPM")]
+    rpm = float(np.ravel(m[rpm_keys[0]])[0]) if rpm_keys else 1797.0
+    return np.ravel(m[key]).astype(float), rpm
 
 
 def load_de(path):
